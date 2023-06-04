@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Simple website project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is code for my personal website jakobjozelj.com.
 
-## Available Scripts
+It allows visitors to navigate the website using the menu, it also includes /Login route where owner of the webiste can login. 
+After loged in there is a page with 4 'Cards', 2 are for adding new posts and, 2 are for deleteing the existing posts. 
+You can also log out from the webiste. This invalidates server side session that is stored in the database.
 
-In the project directory, you can run:
+Front end is done in:
+ - ReactJS
+ - ChakraUI
+ 
+ Back end is done in:
+  - NodeJS
+  - ExpressJS
 
-### `npm start`
+Database is PostgreSQL. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If you wish to use this website as a starting point you may clone the repo at your own risk. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the git repository
+ - ```git clone git@github.com:iakobj/jakobjozelj.git```
 
-### `npm test`
+2. Add the .env file in the /backend folder.
+```
+# Database connection details
+POSTGRES_HOST="db"
+POSTGRES_PORT=5432
+POSTGRES_NAME="database"
+POSTGRES_USER="postgres"
+POSTGRES_PASSWORD="password"
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Creates the hash of a password for the user
+# This env variables are used in GeneratePassword.js file
+# Hash that you receive from generator is used in USER_PASSWORD 
+# SALT is used in Login.js to verify the user password at login
+USER_PASSWORD_TO_HASH="password#"
+USER_PASSWORD_SALT="salt"
 
-### `npm run build`
+# Creating first user for loging into the website
+USER_ID="1"
+USER_USERNAME="username"
+USER_PASSWORD="generated_user_password_hash" 
+USER_FIRSTNAME="firstname"
+USER_LASTNAME="lastname"
+USER_EMAIL="email"
+```
+3. Run the GeneratePassword.js file to generate hashed password.
+ - ```node GeneratePassword.js```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Copy the output to the .env variable USER_PASSWORD.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. Change the server_name in /ingress/nginx.conf to reflect your server_name (domain)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Build the images 
+ - ```docker compose build```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Run the images as containers
+ - ```docker compose up -d```

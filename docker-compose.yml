@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    restart: unless-stoped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    restart: unless-stoped
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=your_password
+      - POSTGRES_DB=your_database
+    restart: unless-stoped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  ingress:
+    build:
+      context: ./ingress
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    restart: unless-stoped
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - ingress
+    command: certonly --webroot --webroot-path=/var/www/html --email me@jakobjozelj.com --agree-tos --no-eff-email --staging -d jakobjozelj.com  -d www.jakobjozelj.com
+
+volumes:
+  postgres_data:
+  certbot-etc:
+  certbot-var:
+  web-root:

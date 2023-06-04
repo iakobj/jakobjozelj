@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - backend
-    restart: unless-stoped
+    restart: unless-stopped
 
   backend:
     build:
@@ -22,7 +22,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=your_password
       - POSTGRES_DB=your_database
-    restart: unless-stoped
+    restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -40,7 +40,8 @@ services:
       - web-root:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-    restart: unless-stoped
+      - dhparam:/etc/ssl/certs
+    restart: unless-stopped
 
   certbot:
     image: certbot/certbot

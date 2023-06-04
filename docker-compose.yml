@@ -59,3 +59,4 @@ volumes:
   certbot-etc:
   certbot-var:
   web-root:
+  dhparam:

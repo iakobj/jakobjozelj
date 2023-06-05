@@ -60,4 +60,3 @@ volumes:
   certbot-etc:
   certbot-var:
   web-root:
-  /root/jakobjozelj/dhparam/:

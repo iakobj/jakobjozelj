@@ -73,5 +73,4 @@ USER_EMAIL="email"
   - ```chmod +x ssl_renew.sh``` 
   - ```sudo crontab -e ```
   - At the end of the file add ```0/12 * * * * /jakob/jakobjozelj/ssl_renew.sh >> /var/log/cron.log 2>&1```
-  - After 5 minutes run this ```tail -f /var/log/cron.log```
  14. That is it.

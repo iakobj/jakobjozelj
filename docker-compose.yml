@@ -52,7 +52,7 @@ services:
       - certbot-var:/var/lib/letsencrypt
     depends_on:
       - ingress
-    command: certonly --webroot --webroot-path=/var/www/html --email me@jakobjozelj.com --agree-tos --no-eff-email --force-renewal -d jakobjozelj.com  -d www.jakobjozelj.com
+    command: certonly --webroot --webroot-path=/var/www/html --email me@jakobjozelj.com --agree-tos --no-eff-email --staging -d jakobjozelj.com  -d www.jakobjozelj.com
 
 volumes:
   postgres_data:

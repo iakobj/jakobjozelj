@@ -40,7 +40,7 @@ services:
       - web-root:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - dhparam:/etc/ssl/certs
+      - /root/jakobjozelj/dhparam/:/etc/ssl/certs
     restart: unless-stopped
 
   certbot:
@@ -50,7 +50,7 @@ services:
       - web-root:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - dhparam:/etc/ssl/certs
+      - /root/jakobjozelj/dhparam/:/etc/ssl/certs
     depends_on:
       - ingress
     command: certonly --webroot --webroot-path=/var/www/html --email me@jakobjozelj.com --agree-tos --no-eff-email --staging -d jakobjozelj.com  -d www.jakobjozelj.com
@@ -60,9 +60,4 @@ volumes:
   certbot-etc:
   certbot-var:
   web-root:
-  dhparam:
-    driver: local
-    driver_opts:
-      type: none
-      device: /root/jakobjozelj/dhparam/
-      o: bind
+  /root/jakobjozelj/dhparam/:

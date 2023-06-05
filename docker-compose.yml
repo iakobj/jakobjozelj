@@ -60,8 +60,8 @@ volumes:
   certbot-var:
   web-root:
   dhparam:
-      driver: local
-      driver_opts:
+    driver: local
+    driver_opts:
       type: none
       device: /root/jakobjozelj/dhparam/
       o: bind

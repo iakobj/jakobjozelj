@@ -4,9 +4,6 @@ const {pool} = require("./Database");
 const crypto = require('crypto')
 require("dotenv").config();
 
-const salt = process.env.USER_PASSWORD_SALT;
-console.log(salt);
-
 loginRouter = express.Router();
 
 loginRouter.use(express.urlencoded({extended: false}));
@@ -14,6 +11,10 @@ loginRouter.use(bodyParser.json());
 
 // Login
 loginRouter.post("/", async (req, res) => {
+
+    const salt = process.env.USER_PASSWORD_SALT;
+    console.log(salt);
+    
     const {username, password} = req.body;
     console.log("Login Express route started....");
 

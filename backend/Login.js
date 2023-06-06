@@ -13,8 +13,6 @@ loginRouter.use(bodyParser.json());
 
 // Login
 loginRouter.post("/", async (req, res) => {
-    console.log('Salt is:  ')
-    console.log(salt);
     const {username, password} = req.body;
     console.log("Login Express route started....");
 

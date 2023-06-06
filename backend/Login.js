@@ -5,6 +5,7 @@ const crypto = require('crypto')
 require("dotenv").config();
 
 const salt = process.env.USER_PASSWORD_SALT;
+console.log(salt);
 
 loginRouter = express.Router();
 
